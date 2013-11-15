@@ -10,22 +10,33 @@ import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
+import controle.LerXml;
+
 public class DaoMalaDireta {
 
 	public static ArrayList<Cliente> pegaCliente(String codigo) {
 		try {
-			// LerXml.LendoXml();
-			// Class.forName("net.sourceforge.jtds.jdbc.Driver");
-			// //com.microsoft.sqlserver.jdbc.SQLServerDriver
-			// Connection con =
-			// DriverManager.getConnection("jdbc:jtds:sqlserver://"+LerXml.SERVIDOR+":1433/"+LerXml.BANCO+";user="+LerXml.USUARIO+";password="+LerXml.SENHA+"");//jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
-			Class.forName("com.mysql.jdbc.Driver"); // com.microsoft.sqlserver.jdbc.SQLServerDriver
-			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://localhost/pjetiqueta", "root", "senhaadmin");// jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
+			 LerXml.LendoXml();
+			 Class.forName("net.sourceforge.jtds.jdbc.Driver");
+			 //com.microsoft.sqlserver.jdbc.SQLServerDriver
+			 Connection con =
+			 DriverManager.getConnection("jdbc:jtds:sqlserver://"+LerXml.SERVIDOR+":1433/"+LerXml.BANCO+";user="+LerXml.USUARIO+";password="+LerXml.SENHA+"");//jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
+			//Class.forName("com.mysql.jdbc.Driver"); // com.microsoft.sqlserver.jdbc.SQLServerDriver
+//			Connection con = DriverManager.getConnection(
+//					"jdbc:mysql://localhost/pjetiqueta", "root", "senhaadmin");// jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
 			Statement stm = con.createStatement();
 			ResultSet rs = stm
-					.executeQuery("select * from CAD_CLIENTE where CODIGO = "
-							+ codigo);
+					.executeQuery("SELECT     CONVERT(varchar, dbo.CAD_CLIENTE.CODCLI) + + CONVERT(varchar, dbo.CAD_CLIENTE.DIGCLI) AS CODIGO, dbo.CAD_CLIENTE.NOMCLI, "+
+		                      "dbo.CAD_ENDCLI.CODLOGRAD, dbo.CAD_ENDCLI.ENDERECO, dbo.CAD_ENDCLI.NUMERO, dbo.CAD_ENDCLI.BAIRRO, dbo.CAD_ENDCLI.CIDADE, "+
+		                      "dbo.CAD_ENDCLI.ESTADO, dbo.CAD_ENDCLI.CEP, dbo.CAD_ENDCLI.REFER, dbo.CAD_ENDCLI.COMPLEMENTO, dbo.CAD_ENDCLI.TPENDER, "+
+		                      "dbo.CAD_ENDCLI.CODEND"+
+		"FROM         dbo.CAD_CLIENTE INNER JOIN"+
+		                      "dbo.CAD_ENDCLI ON dbo.CAD_CLIENTE.CODCLI = dbo.CAD_ENDCLI.CODCLI"+
+		"WHERE     (dbo.CAD_ENDCLI.TPENDER = 'R') AND (CONVERT(varchar, dbo.CAD_CLIENTE.CODCLI) + + CONVERT(varchar, dbo.CAD_CLIENTE.DIGCLI) =" + codigo);
+							
+//			ResultSet rs = stm
+//					.executeQuery("select * from CAD_CLIENTE where CODIGO = "
+//							+ codigo);
 
 			ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 			while (rs.next()) {
