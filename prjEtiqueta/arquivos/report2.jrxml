@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="317" pageHeight="87" orientation="Landscape" columnWidth="307" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="xPath">
+		<![CDATA[/impressao/item]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="cod_barras" class="java.lang.String">
+		<fieldDescription><![CDATA[codbarras]]></fieldDescription>
+	</field>
+	<field name="preco" class="java.lang.String">
+		<fieldDescription><![CDATA[preco]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="77">
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="126" y="13" width="177" height="37"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="138" y="48" width="123" height="29"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{preco}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="10" y="13" width="98" height="29"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0" evaluationTime="Report">
+					<jr:codeExpression><![CDATA[$F{cod_barras}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="10" y="27" width="98" height="29"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0" evaluationTime="Report">
+					<jr:codeExpression><![CDATA[$F{cod_barras}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="19" y="46" width="81" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cod_barras}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

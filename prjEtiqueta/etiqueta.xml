@@ -1,0 +1,23 @@
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\eclipse\workspace\prjEtiqueta\etiqueta.jar</jar>
+  <outfile>C:\eclipse\workspace\prjEtiqueta\etiqueta.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <customProcName>false</customProcName>
+  <stayAlive>false</stayAlive>
+  <icon>C:\eclipse\workspace\prjEtiqueta\arquivos\icone.ico</icon>
+  <jre>
+    <path>C:\Arquivos de programas\Java\jre6</path>
+    <minVersion>1.0.0_00</minVersion>
+    <maxVersion>1.6.0_00</maxVersion>
+    <dontUsePrivateJres>false</dontUsePrivateJres>
+    <initialHeapSize>0</initialHeapSize>
+    <maxHeapSize>0</maxHeapSize>
+  </jre>
+</launch4jConfig>
