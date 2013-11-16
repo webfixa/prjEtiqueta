@@ -45,7 +45,6 @@ public class TelaMalaDiretaImprimirLista extends JFrame {
 	private JButton jBtExcluir = null;
 	private JButton jBtLimpar = null;
 	private JButton jBtLimparLista = null;
-	private JButton jBtSalvaLista = null;
 	private JButton jBtSair = null;
 	private JLabel jLbEtiqImpressao = null;
 	private JScrollPane jScrollPane = null;
@@ -131,7 +130,6 @@ public class TelaMalaDiretaImprimirLista extends JFrame {
 			jContentPane.add(getJBtExcluir(), null);
 			jContentPane.add(getJBtLimpar(), null);
 			jContentPane.add(getJBtLimparLista(), null);
-			jContentPane.add(getJBtSalvaLista(), null);
 			jContentPane.add(getJBtSair(), null);
 			jContentPane.add(jLbEtiqImpressao, null);
 			jContentPane.add(getJScrollPane(), null);
@@ -447,27 +445,6 @@ public class TelaMalaDiretaImprimirLista extends JFrame {
 					});
 		}
 		return jBtLimparLista;
-	}
-
-	/**
-	 * This method initializes jBtOrçamento
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getJBtSalvaLista() {
-		if (jBtSalvaLista == null) {
-			jBtSalvaLista = new JButton();
-			jBtSalvaLista.setText("Salvar Lista");
-			jBtSalvaLista.setBounds(new Rectangle(580, 102, 105, 36));
-			jBtSalvaLista.setFont(new Font("arial", Font.BOLD, 11));
-			jBtSalvaLista
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							TelaOrcamento orc = new TelaOrcamento();
-						}
-					});
-		}
-		return jBtSalvaLista;
 	}
 
 	/**

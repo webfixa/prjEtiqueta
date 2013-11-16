@@ -32,6 +32,8 @@ public class TelaPrograma extends JFrame {
 	private JMenuItem JMenuItemNomeCodigo;
 	private JMenuItem JMenuItemConsultaLista;
 	private JMenuItem JMenuItemImprimiLista;
+	private JMenuItem jMenuItemCriarEtiquetaManual;
+	private JMenuItem jMenuItemImprimirEtiquetaManual;
 	/**
 	 * This is the default constructor
 	 * @throws IOException 
@@ -249,6 +251,8 @@ public class TelaPrograma extends JFrame {
 			JMenuMalaDireta = new JMenu("Mala Direta");
 			JMenuMalaDireta.add(getJMenuItemNomeCodigo());
 			JMenuMalaDireta.add(getJMenuItemConsultaLista());
+			JMenuMalaDireta.add(getJMenuItemCriarEtiquetaManual());
+			JMenuMalaDireta.add(getJMenuItemImprimirEtiquetaManual());
 		}
 		return JMenuMalaDireta;
 	}
@@ -274,5 +278,26 @@ public class TelaPrograma extends JFrame {
 		}
 		return JMenuItemConsultaLista;
 	}
-	
+	private JMenuItem getJMenuItemCriarEtiquetaManual() {
+		if (jMenuItemCriarEtiquetaManual == null) {
+			jMenuItemCriarEtiquetaManual = new JMenuItem("Criar Etiqueta Manual");
+			jMenuItemCriarEtiquetaManual.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					TelaEtiquetaManual etiqueta = new TelaEtiquetaManual();
+				}
+			});
+		}
+		return jMenuItemCriarEtiquetaManual;
+	}
+	private JMenuItem getJMenuItemImprimirEtiquetaManual() {
+		if (jMenuItemImprimirEtiquetaManual == null) {
+			jMenuItemImprimirEtiquetaManual = new JMenuItem("Imprimir Etiqueta Manual");
+			jMenuItemImprimirEtiquetaManual.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					TelaEscolherEtiquetaManual telaEscolherEtiquetaManual = new TelaEscolherEtiquetaManual();
+				}
+			});
+		}
+		return jMenuItemImprimirEtiquetaManual;
+	}
 }

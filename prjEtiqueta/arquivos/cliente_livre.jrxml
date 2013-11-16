@@ -6,8 +6,8 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="texto_manual" class="java.lang.String">
-		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	<field name="texto" class="java.lang.String">
+		<fieldDescription><![CDATA[texto]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -15,11 +15,11 @@
 	<detail>
 		<band height="75">
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="5" y="17" width="144" height="42"/>
+				<reportElement stretchType="RelativeToBandHeight" x="5" y="10" width="145" height="51"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="9" isBold="true"/>
+					<font fontName="Arial" size="13" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{texto_manual}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{texto}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

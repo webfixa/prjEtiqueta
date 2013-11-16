@@ -23,6 +23,8 @@ import javax.swing.table.TableCellRenderer;
 
 import modelo.Cliente;
 import controle.CtrlMalaDireta;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaMalaDiretaNomeCodigo extends JFrame {
 
@@ -139,6 +141,18 @@ public class TelaMalaDiretaNomeCodigo extends JFrame {
 			tfNome.setBounds(143, 46, 542, 20);
 			jContentPane.add(tfNome);
 			tfNome.setColumns(10);
+			
+			JButton btnsalvarlista = new JButton();
+			btnsalvarlista.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					TelaSalvarLista tela = new TelaSalvarLista();
+					tela.run(listaClientes);
+				}});
+			btnsalvarlista.setText("<html><center>Salvar<br>Lista</center></html>");
+			btnsalvarlista.setFont(new Font("Arial", Font.BOLD, 11));
+			btnsalvarlista.setBounds(new Rectangle(360, 81, 112, 36));
+			btnsalvarlista.setBounds(564, 81, 112, 36);
+			jContentPane.add(btnsalvarlista);
 		}
 		return jContentPane;
 	}
@@ -341,5 +355,4 @@ public class TelaMalaDiretaNomeCodigo extends JFrame {
 	public void setListaClientes(ArrayList<Cliente> listaClientes) {
 		this.listaClientes = listaClientes;
 	}
-
 } // @jve:decl-index=0:visual-constraint="10,10"

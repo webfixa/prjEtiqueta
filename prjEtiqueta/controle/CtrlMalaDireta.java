@@ -2,17 +2,17 @@ package controle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import modelo.Cliente;
+import modelo.DaoMalaDireta;
+import modelo.EtiquetaManual;
+import modelo.Lista;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.data.JRXmlDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-
-import modelo.Cliente;
-import modelo.DaoMalaDireta;
-import modelo.Lista;
 
 public class CtrlMalaDireta {
 
@@ -68,6 +68,40 @@ public class CtrlMalaDireta {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void salvarEtiquetaManual(String nome, String texto, String qnt) {
+		 DaoMalaDireta.salvarEtiquetaManual(nome, texto, qnt);
+		
+	}
+
+	public ArrayList<EtiquetaManual> pegaEtiquetaData(String data) {
+		// TODO Auto-generated method stub
+		return DaoMalaDireta.pegaEtiquetaData(data);
+	}
+
+	public static void imprimirEtiqueta(int selectedIndex,
+			EtiquetaManual etiqueta) {
+		try {
+			String relatorio;
+			String printer = "";
+			
+			relatorio = System.getProperty("user.dir") + "/arquivos/cliente_livre.jasper";
+			List<EtiquetaManual> etiquetas = new ArrayList<EtiquetaManual>();
+			for(int i=0;i<etiqueta.getQnt();i++){
+				etiquetas.add(etiqueta);
+			}
+			JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(etiquetas);
+
+			JasperPrint jp = JasperFillManager.fillReport(relatorio,
+					new HashMap<String, Integer>(), dados);
+
+			JasperViewer.viewReport(jp, false);
+
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

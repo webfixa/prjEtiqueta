@@ -16,27 +16,28 @@ public class DaoMalaDireta {
 
 	public static ArrayList<Cliente> pegaCliente(String codigo) {
 		try {
-			 LerXml.LendoXml();
-			 Class.forName("net.sourceforge.jtds.jdbc.Driver");
-			 //com.microsoft.sqlserver.jdbc.SQLServerDriver
-			 Connection con =
-			 DriverManager.getConnection("jdbc:jtds:sqlserver://"+LerXml.SERVIDOR+":1433/"+LerXml.BANCO+";user="+LerXml.USUARIO+";password="+LerXml.SENHA+"");//jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
-			//Class.forName("com.mysql.jdbc.Driver"); // com.microsoft.sqlserver.jdbc.SQLServerDriver
-//			Connection con = DriverManager.getConnection(
-//					"jdbc:mysql://localhost/pjetiqueta", "root", "senhaadmin");// jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
+//			 LerXml.LendoXml();
+//			 Class.forName("net.sourceforge.jtds.jdbc.Driver");
+//			 //com.microsoft.sqlserver.jdbc.SQLServerDriver
+//			 Connection con =
+//			 DriverManager.getConnection("jdbc:jtds:sqlserver://"+LerXml.SERVIDOR+":1433/"+LerXml.BANCO+";user="+LerXml.USUARIO+";password="+LerXml.SENHA+"");//jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
+			
+			Class.forName("com.mysql.jdbc.Driver"); // com.microsoft.sqlserver.jdbc.SQLServerDriver
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://localhost/pjetiqueta", "root", "senhaadmin");// jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
 			Statement stm = con.createStatement();
-			ResultSet rs = stm
-					.executeQuery("SELECT     CONVERT(varchar, dbo.CAD_CLIENTE.CODCLI) + + CONVERT(varchar, dbo.CAD_CLIENTE.DIGCLI) AS CODIGO, dbo.CAD_CLIENTE.NOMCLI, "+
-		                      "dbo.CAD_ENDCLI.CODLOGRAD, dbo.CAD_ENDCLI.ENDERECO, dbo.CAD_ENDCLI.NUMERO, dbo.CAD_ENDCLI.BAIRRO, dbo.CAD_ENDCLI.CIDADE, "+
-		                      "dbo.CAD_ENDCLI.ESTADO, dbo.CAD_ENDCLI.CEP, dbo.CAD_ENDCLI.REFER, dbo.CAD_ENDCLI.COMPLEMENTO, dbo.CAD_ENDCLI.TPENDER, "+
-		                      "dbo.CAD_ENDCLI.CODEND"+
-		"FROM         dbo.CAD_CLIENTE INNER JOIN"+
-		                      "dbo.CAD_ENDCLI ON dbo.CAD_CLIENTE.CODCLI = dbo.CAD_ENDCLI.CODCLI"+
-		"WHERE     (dbo.CAD_ENDCLI.TPENDER = 'R') AND (CONVERT(varchar, dbo.CAD_CLIENTE.CODCLI) + + CONVERT(varchar, dbo.CAD_CLIENTE.DIGCLI) =" + codigo);
-							
 //			ResultSet rs = stm
-//					.executeQuery("select * from CAD_CLIENTE where CODIGO = "
-//							+ codigo);
+//					.executeQuery("SELECT     CONVERT(varchar, dbo.CAD_CLIENTE.CODCLI) + + CONVERT(varchar, dbo.CAD_CLIENTE.DIGCLI) AS CODIGO, dbo.CAD_CLIENTE.NOMCLI, "+
+//		                      "dbo.CAD_ENDCLI.CODLOGRAD, dbo.CAD_ENDCLI.ENDERECO, dbo.CAD_ENDCLI.NUMERO, dbo.CAD_ENDCLI.BAIRRO, dbo.CAD_ENDCLI.CIDADE, "+
+//		                      "dbo.CAD_ENDCLI.ESTADO, dbo.CAD_ENDCLI.CEP, dbo.CAD_ENDCLI.REFER, dbo.CAD_ENDCLI.COMPLEMENTO, dbo.CAD_ENDCLI.TPENDER, "+
+//		                      "dbo.CAD_ENDCLI.CODEND"+
+//		"FROM         dbo.CAD_CLIENTE INNER JOIN"+
+//		                      "dbo.CAD_ENDCLI ON dbo.CAD_CLIENTE.CODCLI = dbo.CAD_ENDCLI.CODCLI"+
+//		"WHERE     (dbo.CAD_ENDCLI.TPENDER = 'R') AND (CONVERT(varchar, dbo.CAD_CLIENTE.CODCLI) + + CONVERT(varchar, dbo.CAD_CLIENTE.DIGCLI) =" + codigo);
+//							
+			ResultSet rs = stm
+					.executeQuery("select * from CAD_CLIENTE where CODIGO = "
+							+ codigo);
 
 			ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 			while (rs.next()) {
@@ -184,6 +185,57 @@ public class DaoMalaDireta {
 		return clientes;
 		
 
+	}
+
+	public static void salvarEtiquetaManual(String nome, String texto,
+			String qnt) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); // com.microsoft.sqlserver.jdbc.SQLServerDriver
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://localhost/pjetiqueta", "root", "senhaadmin");// jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
+			PreparedStatement stm = con.prepareStatement("INSERT INTO etiqueta_manual (codigo,data,nome,texto_manual,qnt_etiqueta) VALUES (null,?,?,?,?)");
+			DateTime data = new DateTime();
+			stm.setString(1, data.toString("dd/MM/yyyy"));
+			stm.setString(2, nome);
+			stm.setString(3, texto);
+			stm.setInt(4, Integer.parseInt(qnt));
+			int rs = stm
+					.executeUpdate();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static ArrayList<EtiquetaManual> pegaEtiquetaData(String data) {
+		ArrayList<EtiquetaManual> listas = new ArrayList<EtiquetaManual>();
+		try{
+		Class.forName("com.mysql.jdbc.Driver"); // com.microsoft.sqlserver.jdbc.SQLServerDriver
+		Connection con = DriverManager.getConnection(
+				"jdbc:mysql://localhost/pjetiqueta", "root", "senhaadmin");// jdbc:sqlserver://localhost:1433;databaseName=travel;selectMethod=cursor
+		PreparedStatement stm = con.prepareStatement("select * from etiqueta_manual where data = ?");
+		stm.setString(1, data);
+		ResultSet rs = stm.executeQuery();
+		try{
+		while (rs.next()) {
+			EtiquetaManual etiqueta = new EtiquetaManual();
+			etiqueta.setCodigo(rs.getString("codigo"));
+			etiqueta.setData(rs.getString("data"));
+			etiqueta.setNome(rs.getString("nome"));
+			etiqueta.setTexto(rs.getString("texto_manual"));
+			etiqueta.setQnt(Integer.parseInt(rs.getString("qnt_etiqueta")));
+			listas.add(etiqueta);
+		}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		con.close();
+		}catch(Exception e){
+			e.printStackTrace();
+
+		}
+		return listas;
 	}
 
 }
