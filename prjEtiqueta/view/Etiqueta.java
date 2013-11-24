@@ -1,40 +1,32 @@
 package view;
 
-import java.awt.BorderLayout;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
 import java.awt.Dimension;
-import javax.swing.JLabel;
-import java.awt.Rectangle;
-import javax.swing.JTextField;
+import java.awt.Font;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.SystemColor;
+import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.JScrollPane;
-import javax.swing.JComboBox;
-import java.awt.Color;
 import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.HeadlessException;
-import java.awt.SystemColor;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JTable;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-import net.sf.jasperreports.engine.JRException;
-
 import modelo.Itens;
+import net.sf.jasperreports.engine.JRException;
 import controle.CtrlItens;
-import view.MeuRenderer;
-import javax.swing.SwingConstants;
 
 public class Etiqueta extends JFrame {
 
@@ -72,6 +64,8 @@ public class Etiqueta extends JFrame {
 	private JTextField jTfFilial1 = null;
 	private ArrayList<Itens> listaItem = new ArrayList<Itens>();  //  //  @jve:decl-index=0:
 	private int seq = 1;
+	private JCheckBox jChBUnidade = null;
+	private String und;
 	DefaultTableModel dtmc = new DefaultTableModel()
 	{  
         @Override  
@@ -105,7 +99,7 @@ public class Etiqueta extends JFrame {
 		this.setSize(800, 570);
 		this.setResizable(true);
 		this.setContentPane(getJContentPane());
-		this.setTitle("EmissÃ£o de Etiquetas");
+		this.setTitle("Emiss\u00E3o de Etiquetas");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
@@ -132,12 +126,12 @@ public class Etiqueta extends JFrame {
 			jLbPreco1.setBounds(new Rectangle(585, 27, 91, 16));
 			jLbPreco1.setFont(new Font("arial", Font.BOLD, 11));
 			jLbPreco1.setHorizontalAlignment(SwingConstants.RIGHT);
-			jLbPreco1.setText("Preï¿½o:");
+			jLbPreco1.setText("Pre\u00E7o:");
 			jLbPreco = new JLabel();
 			jLbPreco.setBounds(new Rectangle(521, 484, 45, 16));
 			jLbPreco.setFont(new Font("arial", Font.BOLD, 11));
 			jLbPreco.setHorizontalAlignment(SwingConstants.RIGHT);
-			jLbPreco.setText("Preï¿½o:");
+			jLbPreco.setText("Pre\u00E7o:");
 			jLbImpressora = new JLabel();
 			jLbImpressora.setBounds(new Rectangle(29, 503, 107, 16));
 			jLbImpressora.setFont(new Font("arial", Font.BOLD, 11));
@@ -152,7 +146,7 @@ public class Etiqueta extends JFrame {
 			jLbEtiqImpressao.setBounds(new Rectangle(313, 178, 187, 16));
 			jLbEtiqImpressao.setFont(new Font("Dialog", Font.BOLD, 12));
 			jLbEtiqImpressao.setForeground(SystemColor.activeCaption);
-			jLbEtiqImpressao.setText("Etiquetas para Impressï¿½o");
+			jLbEtiqImpressao.setText("Etiquetas para Impress\u00E3o");
 			jLbQnt = new JLabel();
 			jLbQnt.setBounds(new Rectangle(72, 102, 63, 16));
 			jLbQnt.setFont(new Font("arial", Font.BOLD, 11));
@@ -162,12 +156,12 @@ public class Etiqueta extends JFrame {
 			jLbCodBarras.setBounds(new Rectangle(28, 85, 107, 16));
 			jLbCodBarras.setFont(new Font("arial", Font.BOLD, 11));
 			jLbCodBarras.setHorizontalAlignment(SwingConstants.RIGHT);
-			jLbCodBarras.setText("Cï¿½d.Barras: <F5>");
+			jLbCodBarras.setText("C\u00F3d.Barras: <F5>");
 			jLbDescricao = new JLabel();
 			jLbDescricao.setBounds(new Rectangle(27, 66, 109, 16));
 			jLbDescricao.setFont(new Font("arial", Font.BOLD, 11));
 			jLbDescricao.setHorizontalAlignment(SwingConstants.RIGHT);
-			jLbDescricao.setText("Descriï¿½ï¿½o: <F4>");
+			jLbDescricao.setText("Descri\u00E7\u00E3o: <F4>");
 			jLbItem = new JLabel();
 			jLbItem.setBounds(new Rectangle(69, 48, 67, 16));
 			jLbItem.setFont(new Font("arial", Font.BOLD, 11));
@@ -215,6 +209,15 @@ public class Etiqueta extends JFrame {
 			jContentPane.add(getJTfProdVerificador(), null);
 			jContentPane.add(jbEstoque, null);
 			jContentPane.add(getJTfEstoque(), null);	
+			
+			JLabel lblUnidade = new JLabel("Unidade:");
+			lblUnidade.setFont(new Font("Arial", Font.BOLD, 11));
+			lblUnidade.setBounds(521, 504, 57, 14);
+			jContentPane.add(lblUnidade);
+			
+			jChBUnidade = new JCheckBox("");
+			jChBUnidade.setBounds(567, 500, 21, 23);
+			jContentPane.add(jChBUnidade);
 		}
 		return jContentPane;
 	}
@@ -273,11 +276,11 @@ public class Etiqueta extends JFrame {
 						jTfItem.requestFocus();}
 					else
 						if (jTfFilial.getText().equals("2")){
-							jTfFilial1.setText("RJ CONTRUï¿½ï¿½O");
+							jTfFilial1.setText("RJ CONTRUÇÃO");
 							jTfItem.requestFocus();}
 						else
 							if (jTfFilial.getText().equals("3")){
-								jTfFilial1.setText("PJ CALï¿½ADOS");
+								jTfFilial1.setText("PJ CALÇADOS");
 								jTfItem.requestFocus();}
 				}
 			});
@@ -343,10 +346,11 @@ public class Etiqueta extends JFrame {
 								jTfProduto.setText(itens.getProduto());
 								jTfProdVerificador.setText(itens.getProdVerificador());
 								jTfEstoque.setText(itens.getEstoque());
+								und = itens.getUndMaior();
 								jTfQnt.requestFocus();
 							}
 						}
-						}catch(Exception x){javax.swing.JOptionPane.showMessageDialog(null,"Item invÃ¡lido!");}
+						}catch(Exception x){javax.swing.JOptionPane.showMessageDialog(null,"Item inválido!");}
 					}
 				}
 			});
@@ -604,7 +608,7 @@ public class Etiqueta extends JFrame {
 								jTfQnt.requestFocus();
 							}
 						}
-						}catch(Exception x){javax.swing.JOptionPane.showMessageDialog(null,"Item invÃ¡lido!");}
+						}catch(Exception x){javax.swing.JOptionPane.showMessageDialog(null,"Item inválido!");}
 					}
 				}
 			});
@@ -689,12 +693,13 @@ public class Etiqueta extends JFrame {
 					if(jCbDescricao.getText().equals("")|| jTfCodBarras.getText().equals("") || jTfPreco.getText().equals("")|| jTfQnt.getText().equals("")){
 						JOptionPane.showMessageDialog(null, "Preencher a Quantidade!");
 					}else{
-						String[] linha = new String[5];//crio uma nova linha para a tabela com 5 elementos // TODO Auto-generated Event stub actionPerformed()
+						String[] linha = new String[6];//crio uma nova linha para a tabela com 5 elementos // TODO Auto-generated Event stub actionPerformed()
 						linha[0]=Integer.toString(seq);
 					    linha[1]=jCbDescricao.getText();  
 					    linha[2]=jTfCodBarras.getText();  
 					    linha[3]=jTfPreco.getText(); 
 					    linha[4]=jTfQnt.getText(); 
+					    linha[5]=und;
 					    
 					    dtmc.addRow( linha );//Adiciono a linha que eu criei na tabela
 					    jTbEtiquetas.setModel(dtmc);
@@ -824,7 +829,7 @@ public class Etiqueta extends JFrame {
 	private JButton getJBtOrcamento() {
 		if (jBtOrcamento == null) {
 			jBtOrcamento = new JButton();
-			jBtOrcamento.setText("<html><center>Buscar pelo<br>OrÃ§amento</center></html>");
+			jBtOrcamento.setText("<html><center>Buscar pelo<br>Or\u00E7amento</center></html>");
 			jBtOrcamento.setBounds(new Rectangle(579, 134, 105, 36));
 			jBtOrcamento.setFont(new Font("arial", Font.BOLD, 11));
 			jBtOrcamento.addActionListener(new java.awt.event.ActionListener() {
@@ -882,15 +887,16 @@ public class Etiqueta extends JFrame {
 			jTbEtiquetas.setDefaultRenderer(Object.class, renderer);
 		      //Aqui eu defino as colunas que a tabela vai conter     
 		       dtmc.addColumn("Seq");  
-		       dtmc.addColumn("DescriÃ§Ã£o");  
+		       dtmc.addColumn("Descrição");  
 		       dtmc.addColumn("CodBarra");  
-		       dtmc.addColumn("PreÃ§o");  
+		       dtmc.addColumn("Preço");  
 		       dtmc.addColumn("Qnt");
+		       dtmc.addColumn("Und");
 		       jTbEtiquetas.setModel(dtmc);
 		       jTbEtiquetas.getColumn("Seq").setPreferredWidth(90);
-		       jTbEtiquetas.getColumn("DescriÃ§Ã£o").setPreferredWidth(335);
+		       jTbEtiquetas.getColumn("Descrição").setPreferredWidth(335);
 		       jTbEtiquetas.getColumn("CodBarra").setPreferredWidth(134);
-		       jTbEtiquetas.getColumn("PreÃ§o").setPreferredWidth(85);
+		       jTbEtiquetas.getColumn("Preço").setPreferredWidth(85);
 		       jTbEtiquetas.getColumn("Qnt").setPreferredWidth(85);
 		       jTbEtiquetas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		       
@@ -944,8 +950,8 @@ public class Etiqueta extends JFrame {
 					ArrayList<String[]> tabela = new ArrayList<String[]>();
 					while(i<numLinhas)
 					{
-						String[] linha = new String[5];
-						for(int j=0;j<5;j++)
+						String[] linha = new String[6];
+						for(int j=0;j<6;j++)
 						{
 							linha[j]=String.valueOf(jTbEtiquetas.getModel().getValueAt(i, j));
 						}
@@ -955,7 +961,7 @@ public class Etiqueta extends JFrame {
 					}
 					CtrlItens ctrl=new CtrlItens();
 					try {
-						ctrl.impressao(tabela,String.valueOf(jCbTipoEtiqueta.getSelectedItem()),jCbImpressora.getSelectedIndex() ,jChBPreco.isSelected());
+						ctrl.impressao(tabela,String.valueOf(jCbTipoEtiqueta.getSelectedItem()),jCbImpressora.getSelectedIndex() ,jChBPreco.isSelected(), jChBUnidade.isSelected() );
 					} catch (JRException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

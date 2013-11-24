@@ -103,7 +103,7 @@ public class NotaFiscal extends JFrame {
 		this.setSize(800, 570);
 		this.setResizable(true);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Emissï¿½o de Etiquetas por Nota Fiscal");
+		this.setTitle("Emissão de Etiquetas por Nota Fiscal");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
@@ -125,12 +125,12 @@ public class NotaFiscal extends JFrame {
 			jLbNotaFiscal.setBounds(new Rectangle(9, 49, 129, 16));
 			jLbNotaFiscal.setFont(new Font("arial", Font.BOLD, 11));
 			jLbNotaFiscal.setHorizontalAlignment(SwingConstants.RIGHT);
-			jLbNotaFiscal.setText("Nï¿½ Nota Fiscal: <F3>");
+			jLbNotaFiscal.setText("N\u00BA Nota Fiscal: <F3>");
 			jLbPreco = new JLabel();
 			jLbPreco.setBounds(new Rectangle(521, 481, 45, 16));
 			jLbPreco.setFont(new Font("arial", Font.BOLD, 11));
 			jLbPreco.setHorizontalAlignment(SwingConstants.RIGHT);
-			jLbPreco.setText("Preï¿½o:");
+			jLbPreco.setText("Pre\u00E7o:");
 			jLbImpressora = new JLabel();
 			jLbImpressora.setBounds(new Rectangle(29, 500, 107, 16));
 			jLbImpressora.setFont(new Font("arial", Font.BOLD, 11));
@@ -145,7 +145,7 @@ public class NotaFiscal extends JFrame {
 			jLbEtiqImpressao.setBounds(new Rectangle(313, 175, 187, 16));
 			jLbEtiqImpressao.setFont(new Font("Dialog", Font.BOLD, 12));
 			jLbEtiqImpressao.setForeground(SystemColor.activeCaption);
-			jLbEtiqImpressao.setText("Etiquetas para Impressï¿½o");
+			jLbEtiqImpressao.setText("Etiquetas para Impress\u00E3o");
 			jLbFilial = new JLabel();
 			jLbFilial.setBounds(new Rectangle(10, 23, 127, 16));
 			jLbFilial.setFont(new Font("arial", Font.BOLD, 11));
@@ -229,10 +229,10 @@ public class NotaFiscal extends JFrame {
 						jTfFilial1.setText("PJ Center");
 					else
 						if (jTfFilial.getText().equals("2"))
-							jTfFilial1.setText("RFJ Materiais de Construï¿½ï¿½o");
+							jTfFilial1.setText("RFJ Materiais de Construção");
 						else
 							if (jTfFilial.getText().equals("3"))
-								jTfFilial1.setText("JJ Calï¿½ados");
+								jTfFilial1.setText("JJ Calçados");
 					
 					}
 			});
@@ -443,15 +443,15 @@ public class NotaFiscal extends JFrame {
 			jTbEtiquetas.setDefaultRenderer(Object.class, renderer);
 		      //Aqui eu defino as colunas que a tabela vai conter     
 		       dtmc.addColumn("Item");  
-		       dtmc.addColumn("DescriÃ§Ã£o");  
+		       dtmc.addColumn("Descrição");  
 		       dtmc.addColumn("CodBarra");  
-		       dtmc.addColumn("PreÃ§o");  
+		       dtmc.addColumn("Preço");  
 		       dtmc.addColumn("Qnt"); 
 		       jTbEtiquetas.setModel(dtmc);
 		       jTbEtiquetas.getColumn("Item").setPreferredWidth(90);
-		       jTbEtiquetas.getColumn("DescriÃ§Ã£o").setPreferredWidth(335);
+		       jTbEtiquetas.getColumn("Descrição").setPreferredWidth(335);
 		       jTbEtiquetas.getColumn("CodBarra").setPreferredWidth(134);
-		       jTbEtiquetas.getColumn("PreÃ§o").setPreferredWidth(85);
+		       jTbEtiquetas.getColumn("Preço").setPreferredWidth(85);
 		       jTbEtiquetas.getColumn("Qnt").setPreferredWidth(85);
 		       jTbEtiquetas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		       
@@ -556,7 +556,7 @@ public class NotaFiscal extends JFrame {
 	 * @return javax.swing.JComboBox	
 	 */
 	private JComboBox getJCbTipoEtiqueta() {
-		String tipo[] = {"eletro", "geral","gondola", "jÃ³ias","roupas","suporte"};
+		String tipo[] = {"eletro", "geral","gondola", "jóias","roupas","suporte"};
 		if (jCbTipoEtiqueta == null) {
 			jCbTipoEtiqueta = new JComboBox(tipo);
 			jCbTipoEtiqueta.setPreferredSize(new Dimension(200, 20));
@@ -716,7 +716,7 @@ public class NotaFiscal extends JFrame {
 				data = new javax.swing.text.MaskFormatter("##/##/####");
 				jTfData = new JFormattedTextField(data);
 			} catch (ParseException e1) {
-				JOptionPane.showMessageDialog(null, "Data invï¿½lida!");
+				JOptionPane.showMessageDialog(null, "Data inválida!");
 			} 
 			jTfData.setBounds(new Rectangle(144, 71, 104, 20));
 			jTfData.addKeyListener(new java.awt.event.KeyAdapter() {

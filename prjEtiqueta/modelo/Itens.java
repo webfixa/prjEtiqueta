@@ -12,9 +12,10 @@ public class Itens
 	private String produto;
 	private String prodVerificador;
 	private String estoque;
+	private String undMaior;
 	
 	public Itens(int item, String descricao, String cod_barras, int qnt,
-			int filial, String preco, String verificador, String produto, String proVerificador, String estoque) {
+			int filial, String preco, String verificador, String produto, String proVerificador, String estoque, String undMaior) {
 		super();
 		this.item = item;
 		this.descricao = descricao;
@@ -24,8 +25,9 @@ public class Itens
 		this.preco = preco;
 		this.verificador = verificador;
 		this.produto = produto;
-		this.prodVerificador = prodVerificador;
+		this.prodVerificador = proVerificador;
 		this.estoque = estoque;
+		this.undMaior = undMaior;
 	}
 
 	public int getItem() {
@@ -106,6 +108,14 @@ public class Itens
 
 	public void setEstoque(String estoque) {
 		this.estoque = estoque;
+	}
+
+	public String getUndMaior() {
+		return undMaior;
+	}
+
+	public void setUndMaior(String undMaior) {
+		this.undMaior = undMaior;
 	}
 	
 	

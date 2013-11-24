@@ -48,7 +48,7 @@ public class CtrlItens
 	}
 	
 		
-	public void impressao(ArrayList<String[]> tabela, String report, int impressora, boolean impreco) throws JRException, ClassNotFoundException
+	public void impressao(ArrayList<String[]> tabela, String report, int impressora, boolean impreco, boolean unidade) throws JRException, ClassNotFoundException
 	{
 		Element impressao = new Element("impressao");
 		int i=1;		
@@ -60,7 +60,8 @@ public class CtrlItens
 			Element item = new Element("item");   
 			Element descricao = new Element("descricao");  
 			Element codbarras = new Element("codbarras");  
-			Element preco = new Element("preco");  
+			Element preco = new Element("preco");
+			Element unidmaior = new Element("unidmaior");
 			
 			item.setAttribute("id", Integer.toString(i));
 			
@@ -70,10 +71,11 @@ public class CtrlItens
 				preco.setText(linha[3]);
 			else
 				preco.setText(" ");
-			
+			unidmaior.setText(linha[5]);
 			item.addContent(descricao);  
 			item.addContent(codbarras);  
-			item.addContent(preco);  
+			item.addContent(preco); 
+			item.addContent(unidmaior);
 			
 			impressao.addContent(item);
 			i++;
@@ -97,7 +99,7 @@ public class CtrlItens
 	            xout.output(doc, arquivo);
 	        
 	            //exibindo o Relatório
-	            relatorio(report,impressora,impreco);
+	            relatorio(report,impressora,impreco, unidade);
 	            
 	        } catch (IOException e)   
 	        {  
@@ -105,7 +107,7 @@ public class CtrlItens
 	        }        
 	}
 	
-	public void relatorio(String report,int impressora, boolean impreco)throws JRException , ClassNotFoundException
+	public void relatorio(String report,int impressora, boolean impreco, boolean unidade)throws JRException , ClassNotFoundException
 	{
 		try 
 		{
@@ -114,12 +116,16 @@ public class CtrlItens
 			if(impressora == 1){
 				printer = "_1";
 			}
+			String und = "";
+			if(unidade){
+				und = "_um";
+			}
 			
 			//Caminho do arquivo Boletim.jasper (bytecode gerado/compilado do nosso relatorio Boletim.jrxml)
 			if(impreco)
-				relatorio = System.getProperty("user.dir") + "/arquivos/"+report+printer+".jasper";
+				relatorio = System.getProperty("user.dir") + "/arquivos/"+report+printer+und+".jasper";
 			else
-				relatorio = System.getProperty("user.dir") + "/arquivos/"+report+printer+"_sp.jasper";
+				relatorio = System.getProperty("user.dir") + "/arquivos/"+report+printer+und+"_sp.jasper";
 			
 			//Configurando a classe JRXmlDataSource que apontara o caminho do  nosso XML de dados e sua pesquisa XPath geral
 			JRXmlDataSource xml = new JRXmlDataSource("impressao.xml","/impressao/item");

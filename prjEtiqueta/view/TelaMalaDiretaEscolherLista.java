@@ -7,10 +7,12 @@ import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -48,8 +49,9 @@ public class TelaMalaDiretaEscolherLista extends JFrame {
 
 	/**
 	 * This is the default constructor
+	 * @throws ParseException 
 	 */
-	public TelaMalaDiretaEscolherLista() {
+	public TelaMalaDiretaEscolherLista() throws ParseException {
 		super();
 		initialize();
 	}
@@ -58,8 +60,9 @@ public class TelaMalaDiretaEscolherLista extends JFrame {
 	 * This method initializes this
 	 * 
 	 * @return void
+	 * @throws ParseException 
 	 */
-	private void initialize() {
+	private void initialize() throws ParseException {
 		this.setSize(800, 493);
 		this.setResizable(true);
 		this.setContentPane(getJContentPane());
@@ -73,8 +76,9 @@ public class TelaMalaDiretaEscolherLista extends JFrame {
 	 * This method initializes jContentPane
 	 * 
 	 * @return javax.swing.JPanel
+	 * @throws ParseException 
 	 */
-	private JPanel getJContentPane() {
+	private JPanel getJContentPane() throws ParseException {
 		if (jContentPane == null) {
 			jLbEtiqImpressao = new JLabel();
 			jLbEtiqImpressao.setBounds(new Rectangle(313, 89, 187, 16));
@@ -97,8 +101,10 @@ public class TelaMalaDiretaEscolherLista extends JFrame {
 			lblData.setFont(new Font("Arial", Font.BOLD, 11));
 			lblData.setBounds(32, 20, 86, 15);
 			jContentPane.add(lblData);
-
-			JTfData = new JTextField();
+			javax.swing.text.MaskFormatter data;
+			data = new javax.swing.text.MaskFormatter("##/##/####");
+			
+			JTfData = new JFormattedTextField(data);
 			JTfData.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {

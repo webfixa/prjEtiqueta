@@ -93,7 +93,7 @@ public class TelaOrcamento extends JFrame {
 		this.setSize(800, 570);
 		this.setResizable(true);
 		this.setContentPane(getJContentPane());
-		this.setTitle("EmissÃ£o de Etiquetas por OrÃ§amento");
+		this.setTitle("Emiss\u00E3o de Etiquetas por Or\u00E7amento");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
@@ -110,12 +110,12 @@ public class TelaOrcamento extends JFrame {
 			jLbNotaFiscal.setBounds(new Rectangle(11, 48, 127, 16));
 			jLbNotaFiscal.setFont(new Font("arial", Font.BOLD, 11));
 			jLbNotaFiscal.setHorizontalAlignment(SwingConstants.RIGHT);
-			jLbNotaFiscal.setText("NÂ° OrÃ§amento: <F3>");
+			jLbNotaFiscal.setText("N\u00BA Or\u00E7amento: <F3>");
 			jLbPreco = new JLabel();
 			jLbPreco.setBounds(new Rectangle(520, 480, 45, 16));
 			jLbPreco.setFont(new Font("arial", Font.BOLD, 11));
 			jLbPreco.setHorizontalAlignment(SwingConstants.RIGHT);
-			jLbPreco.setText("Preï¿½o:");
+			jLbPreco.setText("Pre\u00E7o:");
 			jLbImpressora = new JLabel();
 			jLbImpressora.setBounds(new Rectangle(26, 499, 109, 16));
 			jLbImpressora.setFont(new Font("arial", Font.BOLD, 11));
@@ -130,7 +130,7 @@ public class TelaOrcamento extends JFrame {
 			jLbEtiqImpressao.setBounds(new Rectangle(312, 174, 187, 16));
 			jLbEtiqImpressao.setFont(new Font("Dialog", Font.BOLD, 12));
 			jLbEtiqImpressao.setForeground(SystemColor.activeCaption);
-			jLbEtiqImpressao.setText("Etiquetas para Impressï¿½o");
+			jLbEtiqImpressao.setText("Etiquetas para Impress\u00E3o");
 			jLbFilial = new JLabel();
 			jLbFilial.setBounds(new Rectangle(10, 22, 129, 16));
 			jLbFilial.setFont(new Font("arial", Font.BOLD, 11));
@@ -208,10 +208,10 @@ public class TelaOrcamento extends JFrame {
 						jTfFilial1.setText("PJ Center");
 					else
 						if (jTfFilial.getText().equals("2"))
-							jTfFilial1.setText("RFJ Materiais de Construï¿½ï¿½o");
+							jTfFilial1.setText("RFJ Materiais de Construção");
 						else
 							if (jTfFilial.getText().equals("3"))
-								jTfFilial1.setText("JJ Calï¿½ados");
+								jTfFilial1.setText("JJ Calçados");
 					
 					}
 			});
@@ -231,7 +231,7 @@ public class TelaOrcamento extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 				try {
 					if(jTextField.getText().equals("")){
-						JOptionPane.showMessageDialog(null, "Inserir o nï¿½mero do Orï¿½amento!");
+						JOptionPane.showMessageDialog(null, "Inserir o número do Orçamento!");
 					}else{
 					CtrlOrcamento ctrl = new CtrlOrcamento();
 					for(Iterator<Orcamento> it=ctrl.getOrcamento(jTfFilial.getText(), jTextField.getText()).iterator();it.hasNext();)
@@ -295,7 +295,7 @@ public class TelaOrcamento extends JFrame {
 						}	
 					}
 				} catch (NullPointerException e1) {
-					JOptionPane.showMessageDialog(null, "Inserir o nï¿½mero do Orï¿½amento!");
+					JOptionPane.showMessageDialog(null, "Inserir o número do Orçamento!");
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -423,15 +423,15 @@ public class TelaOrcamento extends JFrame {
 			jTbEtiquetas.setDefaultRenderer(Object.class, renderer);
 		      //Aqui eu defino as colunas que a tabela vai conter     
 		       dtmc.addColumn("Item");  
-		       dtmc.addColumn("DescriÃ§Ã£o");  
+		       dtmc.addColumn("Descrição");  
 		       dtmc.addColumn("CodBarra");  
-		       dtmc.addColumn("PreÃ§o");  
+		       dtmc.addColumn("Preço");  
 		       dtmc.addColumn("Qnt"); 
 		       jTbEtiquetas.setModel(dtmc);
 		       jTbEtiquetas.getColumn("Item").setPreferredWidth(90);
-		       jTbEtiquetas.getColumn("DescriÃ§Ã£o").setPreferredWidth(335);
+		       jTbEtiquetas.getColumn("Descrição").setPreferredWidth(335);
 		       jTbEtiquetas.getColumn("CodBarra").setPreferredWidth(134);
-		       jTbEtiquetas.getColumn("PreÃ§o").setPreferredWidth(85);
+		       jTbEtiquetas.getColumn("Preço").setPreferredWidth(85);
 		       jTbEtiquetas.getColumn("Qnt").setPreferredWidth(85);
 		       jTbEtiquetas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		}
@@ -535,7 +535,7 @@ public class TelaOrcamento extends JFrame {
 	 * @return javax.swing.JComboBox	
 	 */
 	private JComboBox getJCbTipoEtiqueta() {
-		String tipo[] = {"eletro", "geral","gondola", "jÃ³ias","roupas","suporte"};
+		String tipo[] = {"eletro", "geral","gondola", "jóias","roupas","suporte"};
 		if (jCbTipoEtiqueta == null) {
 			jCbTipoEtiqueta = new JComboBox(tipo);
 			jCbTipoEtiqueta.setPreferredSize(new Dimension(200, 20));

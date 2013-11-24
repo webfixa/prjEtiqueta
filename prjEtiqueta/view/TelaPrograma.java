@@ -3,6 +3,7 @@ package view;
 import view.JImagePanel;
 import java.awt.BorderLayout;
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -159,8 +160,8 @@ public class TelaPrograma extends JFrame {
 		if (jMenuUsuarios == null) {
 			jMenuUsuarios = new JMenu();
 			jMenuUsuarios.setText("Usuários");
-//			if(DaoLogin.USER.login.equals("admin")){
-//				jMenuUsuarios.add(getJMenuItemIncluir());}
+			if(DaoLogin.USER.login.equals("admin")){
+				jMenuUsuarios.add(getJMenuItemIncluir());}
 			jMenuUsuarios.add(getJMenuItemAlterar());
 		}
 		return jMenuUsuarios;
@@ -272,7 +273,11 @@ public class TelaPrograma extends JFrame {
 			JMenuItemConsultaLista = new JMenuItem("Consulta Lista");
 			JMenuItemConsultaLista.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					TelaMalaDiretaEscolherLista escolherLista = new TelaMalaDiretaEscolherLista();
+					try {
+						TelaMalaDiretaEscolherLista escolherLista = new TelaMalaDiretaEscolherLista();
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
 				}
 			});
 		}
